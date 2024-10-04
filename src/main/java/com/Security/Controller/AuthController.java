@@ -70,6 +70,7 @@ public class AuthController {
         }
     }
 
+    // get method
     @GetMapping("/user/{name}")
     public ResponseEntity<?> getUserByName(@PathVariable("name") String userName) {
         Optional<User> userOptional = userService.getUserByUserName(userName);
