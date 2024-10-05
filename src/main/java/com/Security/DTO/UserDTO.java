@@ -1,9 +1,8 @@
 package com.Security.DTO;
 
 
-import org.springframework.validation.annotation.Validated;
 
-@Validated
+
 public class UserDTO {
 
     private Integer userId;
@@ -31,8 +30,8 @@ public class UserDTO {
     public Integer getId() {
         return userId;
     }
-    public void setId(Integer id) {
-        this.userId = id;
+    public void setId(Integer userId) {
+        this.userId = userId;
     }
     public String getUserName() {
         return userName;
@@ -45,6 +44,15 @@ public class UserDTO {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
 

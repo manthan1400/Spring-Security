@@ -10,11 +10,12 @@ import java.util.Objects;
 public class User {
 
     @Id // Marks this field as the primary key
-    @GeneratedValue(strategy = GenerationType.AUTO) // Auto-increment strategy
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment strategy
+    @Column(name = "userID")
     private Integer userId;
 
 
-    @Column(name = "userName", nullable = false) // Maps to the USERNAME column
+    @Column(name = "username", nullable = false) // Maps to the USERNAME column
     private String userName;
 
 
@@ -33,13 +34,12 @@ public class User {
 
     // Getters and Setters
 
-
     public Integer getUserId() {
         return userId;
     }
 
     public void setUserId(Integer userId) {
-        userId = userId;
+        this.userId = userId; // Use 'this' to refer to the class field
     }
 
     public String getUserName() {
