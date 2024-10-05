@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -40,9 +41,9 @@ public class UserService implements UserDetailsService {
             throw new IllegalArgumentException("Username and password cannot be null");
         }
 
-        logger.info("Attempting to create user with username: {}", userName);
-        try {
 
+        try {
+            logger.info("Attempting to create user with username: {}", userName);
             // Check if user already exists
             if (userRepository.findByUserName(userName).isPresent()) {
                 logger.warn("User already exists with username: {}", userName);
@@ -61,7 +62,11 @@ public class UserService implements UserDetailsService {
         } catch (IllegalArgumentException e) {
             logger.error("Validation error: {}", e.getMessage());
             throw e;  // Rethrow to inform the caller of the validation error
-        } catch (Exception e) {
+        }
+        catch (DataIntegrityViolationException e) {
+            logger.error("Data integrity violation: {}", e.getMessage(), e);
+            throw new RuntimeException("User creation failed due to data integrity violation");
+        }catch (Exception e) {
             logger.error("An error occurred while creating user: {}", e.getMessage(), e);
             throw new RuntimeException("User creation failed");  // Rethrow with a generic message
         }

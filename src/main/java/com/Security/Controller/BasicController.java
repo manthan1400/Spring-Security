@@ -1,9 +1,9 @@
 package com.Security.Controller;
+
 import com.Security.DTO.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.web.csrf.CsrfToken;
 import com.Security.Model.User;
 import com.Security.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +20,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/auth")
 @Validated
-public class AuthController {
+public class BasicController {
 
-    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+    private static final Logger logger = LoggerFactory.getLogger(BasicController.class);
 
     @Autowired
     private AuthenticationManager authenticationManager;
