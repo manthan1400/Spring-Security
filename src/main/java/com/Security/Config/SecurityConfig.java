@@ -49,6 +49,7 @@ public class SecurityConfig  {
                         .ignoringRequestMatchers( "/auth/**") // Customize as needed
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 )
+//                        add "/auth/**" in both
                 .
                 authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**")
