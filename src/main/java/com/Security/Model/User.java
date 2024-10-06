@@ -12,15 +12,15 @@ import java.util.Set;
 @Table(name = "users")
 public class User {
 
-    @Id // Marks this field as the primary key
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment strategy
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userID")
     private Integer userId;
 
-    @Column(name = "username", nullable = false) // Maps to the USERNAME column
+    @Column(name = "username", nullable = false)
     private String userName;
 
-    @Column(name = "password", nullable = false) // Maps to the PASSWORD column
+    @Column(name = "password", nullable = false)
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -49,7 +49,7 @@ public class User {
         this.password = password;
     }
 
-    // Getters and Setters
+
 
     public Integer getUserId() {
         return userId;

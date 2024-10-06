@@ -87,8 +87,15 @@ public class BasicController {
 
     @DeleteMapping("/deleteAll")
     public ResponseEntity<String> deleteAllUsers() {
-        userService.deleteAllUsers();
-        return ResponseEntity.ok("All users deleted successfully.");
+        try {
+            userService.deleteAllUsers();
+            return ResponseEntity.ok("All users deleted successfully.");
+        } catch (Exception e) {
+            // Handle the exception properly
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred: " + e.getMessage());
+        }
+
     }
 
     public static class LoginResponse {

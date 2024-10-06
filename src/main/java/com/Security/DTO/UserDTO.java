@@ -10,11 +10,9 @@ import java.util.Set;
 public class UserDTO {
 
     private Integer userId;
-
     private String userName;
     private String password;
-
-    Set<Role> roles = new HashSet<>();
+    private Set<Role> roles; // Changed to List for deserialization
 
     public UserDTO(Integer userId, String userName, String password, Set<Role> roles) {
         this.userId = userId;
@@ -26,17 +24,7 @@ public class UserDTO {
     // Default constructor
     public UserDTO() {}
 
-    // Parameterized constructor
-    public UserDTO(Integer userId, String userName, String password) {
-        this.userId = userId;
-        this.userName = userName;
-        this.password = password;
-    }
-
-
-
     // Getters and Setters
-
 
     public Integer getUserId() {
         return userId;
@@ -57,12 +45,15 @@ public class UserDTO {
     public String getUserName() {
         return userName;
     }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -72,10 +63,9 @@ public class UserDTO {
         return "UserDTO{" +
                 "userId=" + userId +
                 ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
+                ", roles=" + roles +
                 '}';
     }
-
 
 }
 

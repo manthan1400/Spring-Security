@@ -30,7 +30,7 @@ public class DataConfig {
         // Additional JPA properties
         java.util.Properties properties = new java.util.Properties();
         properties.put("hibernate.hbm2ddl.auto", "update");
-//        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
+        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
         properties.put("hibernate.show_sql", "true");
         em.setJpaProperties(properties);
 
@@ -38,7 +38,7 @@ public class DataConfig {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(@Lazy EntityManagerFactory emf) {
+    public PlatformTransactionManager transactionManager( EntityManagerFactory emf) {
         return new JpaTransactionManager(emf);
     }
 

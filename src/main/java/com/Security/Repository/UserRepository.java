@@ -16,10 +16,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     Optional<User> findByUserName(String username);
 
-    @Modifying
-    @Transactional
-    @Query("DELETE FROM User")
-    void deleteAllUsers();
+        @Modifying
+        @Transactional
+        @Query("DELETE FROM User u")
+        void deleteAllUsers();
 
     @Query("SELECT u FROM User u JOIN u.roles r WHERE r.roleName IN :roleName")
     List<User> findUsersByRoleName(@Param("roleName") List<String> roleName);

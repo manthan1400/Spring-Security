@@ -6,6 +6,7 @@ import com.Security.Model.Role;
 import com.Security.Model.User;
 import com.Security.Repository.RoleRepository;
 import com.Security.Repository.UserRepository;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +24,13 @@ import java.util.*;
 
 
 @Service
+//@Transactional
 public class UserService implements UserDetailsService {
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+
+    @Autowired
+    private EntityManager entityManager;
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -72,7 +77,9 @@ public class UserService implements UserDetailsService {
             user.setRoles(persistedRoles);
 
             // Save user to the repository
+            logger.info("Saving user: {}", user);
             userRepository.save(user);
+            entityManager.flush();
             logger.info("User created successfully: {}", userName);
 
         } catch (IllegalArgumentException e) {
@@ -103,8 +110,8 @@ public class UserService implements UserDetailsService {
         return userRepository.findUsersByRoleName(roleName);
     }
 
+    @Transactional
     public void deleteAllUsers() {
-
         userRepository.deleteAllUsers();
     }
 
