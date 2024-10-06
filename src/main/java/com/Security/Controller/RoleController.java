@@ -17,6 +17,7 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
+    //Register new role
     @PostMapping("/register")
     public ResponseEntity<String> createRole(@RequestBody RoleDTO roleDTO){
         try{

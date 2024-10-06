@@ -15,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -70,11 +71,18 @@ public class BasicController {
         }
     }
 
-    // get method ny name
-    @GetMapping("/username/{username}")
+    // get user by name
+    @GetMapping("/user/{username}")
     public ResponseEntity<UserDTO> getUserByUsername(@PathVariable String username) {
         UserDTO userResponse = userService.getUserByUserName(username);
         return ResponseEntity.ok(userResponse);
+    }
+
+    //get user by Role
+    @GetMapping("/users/by-role")
+    public ResponseEntity<List<User>> getUsersByRoles(@RequestParam List<String> roleName) {
+        List<User> users = userService.findUsersByRoles(roleName);
+        return ResponseEntity.ok(users);
     }
 
     @DeleteMapping("/deleteAll")
