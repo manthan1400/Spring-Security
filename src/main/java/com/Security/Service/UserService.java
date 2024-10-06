@@ -98,14 +98,6 @@ public class UserService implements UserDetailsService {
     return new UserDTO(user.getUserId(), user.getUserName(),user.getPassword(),roles);
     }
 
-    @Transactional(readOnly = true)
-    public List<User> findUsersByRoleName(List<String> roleNames) {
-
-        logger.info("finding username based on roleName: {}",roleNames);
-
-        return userRepository.findUsersByRoleNames(roleNames);
-    }
-
     public void deleteAllUsers() {
 
         userRepository.deleteAllUsers();
