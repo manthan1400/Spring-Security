@@ -2,19 +2,26 @@ package com.Security.Service;
 
 import com.Security.DTO.RoleDTO;
 import com.Security.Model.Role;
+import com.Security.Model.User;
 import com.Security.Repository.RoleRepository;
+import com.Security.Repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class RoleService {
 
     private static final Logger logger = LoggerFactory.getLogger(RoleService.class);
 
+    private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
-    public RoleService(RoleRepository roleRepository) {
+    public RoleService(UserRepository userRepository, RoleRepository roleRepository) {
+        this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }
 
@@ -45,4 +52,7 @@ public class RoleService {
 
         };
     }
+
+
+
 }

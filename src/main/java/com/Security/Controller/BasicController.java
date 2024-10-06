@@ -15,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -31,11 +32,13 @@ public class BasicController {
     private UserService userService;
 
 
+    //Testing
     @GetMapping("/get")
     public ResponseEntity<String> getMessage(){
         return ResponseEntity.ok("Rest API Working");
     }
 
+    //register User
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody @Validated UserDTO userDto) {
         try {
@@ -70,13 +73,22 @@ public class BasicController {
         }
     }
 
-    // get method ny name
-    @GetMapping("/username/{username}")
+    // get user by Username
+    @GetMapping("/user/{username}")
     public ResponseEntity<UserDTO> getUserByUsername(@PathVariable String username) {
         UserDTO userResponse = userService.getUserByUserName(username);
         return ResponseEntity.ok(userResponse);
+
     }
 
+    //get user by RoleName
+    @GetMapping("/users/by-role")
+    public ResponseEntity<List<User>> getUsersByRole(@RequestParam List<String> roleName) {
+        List<User> users = userService.findUsersByRoleName(roleName);
+        return ResponseEntity.ok(users);
+    }
+
+    //delete all users
     @DeleteMapping("/deleteAll")
     public ResponseEntity<String> deleteAllUsers() {
         userService.deleteAllUsers();

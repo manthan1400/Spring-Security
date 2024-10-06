@@ -7,9 +7,7 @@ POST : localhost:8080/auth/role/register
 {
     "roleName":"ROLE_USER"
 }
-
 ----------------------------------------------
-
 POST : localhost:8080/auth/register
 
 {
@@ -36,9 +34,7 @@ POST : localhost:8080/auth/register
         }
     ]
 }
-
 ---------------------------------------------
-
 POST : localhost:8080/auth/login
 
 ## for all users password is "pass"
@@ -49,9 +45,14 @@ POST : localhost:8080/auth/login
 }
 
 ----------------------------
+Delete all users
 
 DELETE : localhost:8080/auth/deleteAll
-
 ____________________________
+get user based on userName
 
 GET : localhost:8080/auth/username/CEO
+--------------------------------
+get user based on roleName
+
+localhost:8080/auth/users/by-role?roleName=ROLE_USER
