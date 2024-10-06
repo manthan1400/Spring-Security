@@ -1,0 +1,57 @@
+POST : localhost:8080/auth/role/register
+
+{
+    "roleName":"ROLE_ADMIN"
+}
+
+{
+    "roleName":"ROLE_USER"
+}
+
+----------------------------------------------
+
+POST : localhost:8080/auth/register
+
+{
+    "userName": "CEO",
+    "password": "pass",
+    "roles": [
+
+        {
+         "roleName": "ROLE_USER"
+        },
+         {
+         "roleName": "ROLE_ADMIN"
+        }
+    ]
+}
+
+{
+    "userName": "emp",
+    "password": "pass",
+    "roles": [
+
+        {
+         "roleName": "ROLE_USER"
+        }
+    ]
+}
+
+---------------------------------------------
+
+POST : localhost:8080/auth/login
+
+## for all users password is "pass"
+
+{
+    "userName": "CEO",
+    "password": "pass"
+}
+
+----------------------------
+
+DELETE : localhost:8080/auth/deleteAll
+
+____________________________
+
+GET : localhost:8080/auth/username/CEO

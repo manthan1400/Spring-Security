@@ -46,7 +46,7 @@ public class BasicController {
         }
     }
 
-
+    // login method
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody User user) {
         logger.info("Login attempt for user: {}", user.getUserName());
@@ -70,17 +70,17 @@ public class BasicController {
         }
     }
 
-    // get method
-    @GetMapping("/user/{name}")
-    public ResponseEntity<?> getUserByName(@PathVariable("name") String userName) {
-        Optional<User> userOptional = userService.getUserByUserName(userName);
+    // get method ny name
+    @GetMapping("/username/{username}")
+    public ResponseEntity<UserDTO> getUserByUsername(@PathVariable String username) {
+        UserDTO userResponse = userService.getUserByUserName(username);
+        return ResponseEntity.ok(userResponse);
+    }
 
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            return ResponseEntity.ok(new UserDTO(user.getUserName(), user.getPassword())); // Use DTO for response
-        } else {
-            return ResponseEntity.notFound().build(); // Return 404 if user not found
-        }
+    @DeleteMapping("/deleteAll")
+    public ResponseEntity<String> deleteAllUsers() {
+        userService.deleteAllUsers();
+        return ResponseEntity.ok("All users deleted successfully.");
     }
 
     public static class LoginResponse {

@@ -3,7 +3,10 @@ package com.Security.Model;
 import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -14,13 +17,27 @@ public class User {
     @Column(name = "userID")
     private Integer userId;
 
-
     @Column(name = "username", nullable = false) // Maps to the USERNAME column
     private String userName;
 
-
     @Column(name = "password", nullable = false) // Maps to the PASSWORD column
     private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    Set<Role> roles = new HashSet<>();
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
     // Default constructor
     public User() {}
