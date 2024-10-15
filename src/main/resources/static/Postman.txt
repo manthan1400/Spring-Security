@@ -1,57 +1,63 @@
-POST : localhost:8080/auth/role/register
+    POST : localhost:8080/auth/role/register
 
-{
-    "roleName":"ROLE_ADMIN"
-}
+    {
+        "roleName":"ROLE_ADMIN"
+    }
 
-{
-    "roleName":"ROLE_USER"
-}
+    {
+        "roleName":"ROLE_USER"
+    }
 
-----------------------------------------------
+    ----------------------------------------------
 
-POST : localhost:8080/auth/register
+    POST : localhost:8080/auth/register
 
-{
-    "userName": "CEO",
-    "password": "pass",
-    "roles": [
+    {
+        "userName": "CEO",
+        "password": "pass",
+        "roles": [
 
-        {
-         "roleName": "ROLE_USER"
-        },
-         {
-         "roleName": "ROLE_ADMIN"
-        }
-    ]
-}
+            {
+             "roleName": "ROLE_USER"
+            },
+             {
+             "roleName": "ROLE_ADMIN"
+            }
+        ]
+    }
 
-{
-    "userName": "emp",
-    "password": "pass",
-    "roles": [
+    {
+        "userName": "emp",
+        "password": "pass",
+        "roles": [
 
-        {
-         "roleName": "ROLE_USER"
-        }
-    ]
-}
+            {
+             "roleName": "ROLE_USER"
+            }
+        ]
+    }
 
----------------------------------------------
+    ---------------------------------------------
 
-POST : localhost:8080/auth/login
+    POST : localhost:8080/auth/login
 
-## for all users password is "pass"
+    ## for all users password is "pass"
 
-{
-    "userName": "CEO",
-    "password": "pass"
-}
+    {
+        "userName": "CEO",
+        "password": "pass"
+    }
 
-----------------------------
+    ----------------------------
 
-DELETE : localhost:8080/auth/deleteAll
+    DELETE : localhost:8080/auth/deleteAll
 
-____________________________
+    ____________________________
 
-GET : localhost:8080/auth/username/CEO
+    GET : localhost:8080/auth/user/CEO
+
+    --------------------------
+
+    GET : localhost:8080/auth/users/by-role?roleName=ROLE_ADMIN
+
+    -----------------------------------

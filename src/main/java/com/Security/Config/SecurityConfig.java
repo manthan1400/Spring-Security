@@ -9,17 +9,19 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.firewall.HttpFirewall;
+import org.springframework.security.web.firewall.StrictHttpFirewall;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig  {
 
     private final UserService userService;
+
     public SecurityConfig(UserService userService) {
         this.userService = userService;
     }
@@ -45,14 +47,15 @@ public class SecurityConfig  {
         http
                 .
                 csrf(csrf -> csrf
-                        .ignoringRequestMatchers( "/auth/**") // Customize as needed
+                        .ignoringRequestMatchers("/auth/**", "/admin/**", "/actuator/**") // Customize as needed
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 )
-//                        add "/auth/**" in both
+//
                 .
                 authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll() // Allow access to these endpoints
                         .requestMatchers("/admin/**").hasRole("ADMIN") // Only ADMIN can access admin endpoints
+                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/actuator/**").permitAll() // Allow access to these endpoints
                         .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest()
                         .authenticated() // Require authentication for other requests
@@ -65,6 +68,19 @@ public class SecurityConfig  {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
+    @Bean
+    public HttpFirewall allowUrlEncodedNewlineHttpFirewall() {
+        StrictHttpFirewall firewall = new StrictHttpFirewall();
+        firewall.setAllowUrlEncodedPeriod(true); // Allow URL-encoded period
+        return firewall;
+    }
+
+
+
+
+
 
 
 }

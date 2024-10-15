@@ -16,7 +16,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
@@ -35,16 +34,6 @@ public class BasicController {
     @GetMapping("/get")
     public ResponseEntity<String> getMessage(){
         return ResponseEntity.ok("Rest API Working");
-    }
-
-    @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody @Validated UserDTO userDto) {
-        try {
-            userService.createUser(userDto);
-            return ResponseEntity.ok("User registered successfully");
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
     }
 
     // login method
@@ -85,18 +74,7 @@ public class BasicController {
         return ResponseEntity.ok(users);
     }
 
-    @DeleteMapping("/deleteAll")
-    public ResponseEntity<String> deleteAllUsers() {
-        try {
-            userService.deleteAllUsers();
-            return ResponseEntity.ok("All users deleted successfully.");
-        } catch (Exception e) {
-            // Handle the exception properly
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("An error occurred: " + e.getMessage());
-        }
 
-    }
 
     public static class LoginResponse {
         private String message;

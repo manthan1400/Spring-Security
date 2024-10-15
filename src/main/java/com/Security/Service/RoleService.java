@@ -12,6 +12,7 @@ public class RoleService {
 
     private static final Logger logger = LoggerFactory.getLogger(RoleService.class);
 
+    // constructor Injection
     private final RoleRepository roleRepository;
 
     public RoleService(RoleRepository roleRepository) {

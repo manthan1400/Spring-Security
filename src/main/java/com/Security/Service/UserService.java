@@ -95,7 +95,7 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public UserDTO getUserByUserName(String userName) {
         User user = userRepository.findByUserName(userName)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
@@ -119,18 +119,13 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Optional<User> optionalUser =userRepository.findByUserName(username);
-        if (optionalUser.isEmpty()) {
-            throw new UsernameNotFoundException("User not found");
-        }
-
-        User user = optionalUser.get();
-
-
+        User user = userRepository.findByUserName(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         return new org.springframework.security.core.userdetails.User(
                 user.getUserName(),
                 user.getPassword(),
-                new ArrayList<>());
+                new ArrayList<>()); // Add authorities if needed
+
     }
 }
