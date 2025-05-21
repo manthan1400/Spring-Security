@@ -65107,3 +65107,9 @@ Unconditional classes:
 2024-10-05T21:31:08.084+05:30 DEBUG 19536 --- [Security] [http-nio-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.Security.Controller.BasicController$LoginResponse@dbef29c]
 2024-10-05T21:31:08.092+05:30 DEBUG 19536 --- [Security] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
 2024-10-05T21:31:08.092+05:30 DEBUG 19536 --- [Security] [http-nio-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2025-05-21T23:35:29.982+05:30  INFO 7280 --- [Security] [main] com.Security.SecurityApplicationTests    : Starting SecurityApplicationTests using Java 17.0.11 with PID 7280 (started by bhosa in C:\Users\bhosa\Desktop\SpringBoot\Projects\Security)
+2025-05-21T23:35:29.985+05:30  INFO 7280 --- [Security] [main] com.Security.SecurityApplicationTests    : No active profile set, falling back to 1 default profile: "default"
+2025-05-21T23:35:29.985+05:30 DEBUG 7280 --- [Security] [main] o.s.boot.SpringApplication               : Loading source class com.Security.SecurityApplicationTests$TestConfig
+2025-05-21T23:35:30.029+05:30 DEBUG 7280 --- [Security] [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@4a9419d7
+2025-05-21T23:35:30.239+05:30  INFO 7280 --- [Security] [main] com.Security.SecurityApplicationTests    : Started SecurityApplicationTests in 0.561 seconds (process running for 1.665)
+2025-05-21T23:35:31.152+05:30 DEBUG 7280 --- [Security] [SpringApplicationShutdownHook] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@4a9419d7, started on Wed May 21 23:35:30 IST 2025
