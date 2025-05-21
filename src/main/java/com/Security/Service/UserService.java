@@ -3,7 +3,8 @@ package com.Security.Service;
 import com.Security.DTO.UserDTO;
 import com.Security.Model.User;
 import com.Security.Repository.UserRepository;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -16,11 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Optional;
-@Slf4j
+
 @Service
 public class UserService implements UserDetailsService {
 
-    
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -42,10 +43,10 @@ public class UserService implements UserDetailsService {
 
 
         try {
-            log.info("Attempting to create user with username: {}", userName);
+            logger.info("Attempting to create user with username: {}", userName);
             // Check if user already exists
             if (userRepository.findByUserName(userName).isPresent()) {
-                log.warn("User already exists with username: {}", userName);
+                logger.warn("User already exists with username: {}", userName);
                 throw new IllegalArgumentException("Username already taken");
             }
 
@@ -56,17 +57,17 @@ public class UserService implements UserDetailsService {
 
             // Save user to the repository
             userRepository.save(user);
-            log.info("User created successfully: {}", userName);
+            logger.info("User created successfully: {}", userName);
 
         } catch (IllegalArgumentException e) {
-            log.error("Validation error: {}", e.getMessage());
+            logger.error("Validation error: {}", e.getMessage());
             throw e;  // Rethrow to inform the caller of the validation error
         }
         catch (DataIntegrityViolationException e) {
-            log.error("Data integrity violation: {}", e.getMessage(), e);
+            logger.error("Data integrity violation: {}", e.getMessage(), e);
             throw new RuntimeException("User creation failed due to data integrity violation");
         }catch (Exception e) {
-            log.error("An error occurred while creating user: {}", e.getMessage(), e);
+            logger.error("An error occurred while creating user: {}", e.getMessage(), e);
             throw new RuntimeException("User creation failed");  // Rethrow with a generic message
         }
     }
@@ -89,8 +90,5 @@ public class UserService implements UserDetailsService {
                 user.getUserName(),
                 user.getPassword(),
                 new ArrayList<>());
-    }
-
-    public void deleteAllUsers() {
     }
 }
